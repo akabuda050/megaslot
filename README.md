@@ -9,7 +9,7 @@ Node.js and Vue.js application to show how slot machines work.
    - Run `docker-compose run --rm client npm run build`
    - Run `docker-compose run --rm admin npm run build`
    - Run `docker-compose up node db`
-   - Open `http://localhost:${VUE_APP_CLIENT_PORT}`
+   - Open `http://localhost:${BE_PORT}` where `${BE_PORT}` is a variable from .env
  
  - Run Client Dev
    - Run `docker-compose up node db client`
