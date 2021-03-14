@@ -17,7 +17,7 @@ services:
     expose:
       - ${BE_PORT}
     ports:
-      - ${BE_PORT}:${BE_PORT}
+      - ${BE_FORWARD_PORT}:${BE_PORT}
     command: "npm run startLocal"
     networks:
       - app
@@ -30,7 +30,7 @@ services:
     environment:
       - NODE_ENV=${NODE_ENV}
       - VUE_APP_BE_URL=${BE_URL}
-      - VUE_APP_BE_PORT=${BE_PORT}
+      - VUE_APP_BE_PORT=${BE_FORWARD_PORT}
       - VUE_APP_CLIENT_PUBLIC_PATH=${VUE_APP_CLIENT_PUBLIC_PATH}
     volumes:
       - ./src/front/client:/home/node/app
@@ -48,7 +48,7 @@ services:
     environment:
       - NODE_ENV=${NODE_ENV}
       - VUE_APP_BE_URL=${BE_URL}
-      - VUE_APP_BE_PORT=${BE_PORT}
+      - VUE_APP_BE_PORT=${BE_FORWARD_PORT}
       - VUE_APP_ADMIN_PUBLIC_PATH=${VUE_APP_ADMIN_PUBLIC_PATH}
     volumes:
       - ./src/front/admin:/home/node/app
