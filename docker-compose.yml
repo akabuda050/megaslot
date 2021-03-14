@@ -1,0 +1,81 @@
+version: "3.9"
+services:
+  node:
+    image: "node:10"
+    env_file: .env
+    user: "node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - DATABASE_URL=${DB_URL}
+      - BE_URL=${BE_URL}
+      - BE_PORT=${BE_PORT}
+    volumes:
+      - ./src/back:/home/node/app
+      - ./src/front/client/dist:/home/node/front/dist/client
+      - ./src/front/admin/dist:/home/node/front/dist/admin
+    expose:
+      - ${BE_PORT}
+    ports:
+      - ${BE_PORT}:${BE_PORT}
+    command: "npm run startLocal"
+    networks:
+      - app
+
+  client:
+    image: "node:10"
+    env_file: .env
+    user: "node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - VUE_APP_BE_URL=${BE_URL}
+      - VUE_APP_BE_PORT=${BE_PORT}
+      - VUE_APP_CLIENT_PUBLIC_PATH=${VUE_APP_CLIENT_PUBLIC_PATH}
+    volumes:
+      - ./src/front/client:/home/node/app
+    ports:
+        - ${VUE_APP_CLIENT_PORT}:8080
+    command: "npm run serve"
+    networks:
+      - app
+
+  admin:
+    image: "node:10"
+    env_file: .env
+    user: "node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - VUE_APP_BE_URL=${BE_URL}
+      - VUE_APP_BE_PORT=${BE_PORT}
+      - VUE_APP_ADMIN_PUBLIC_PATH=${VUE_APP_ADMIN_PUBLIC_PATH}
+    volumes:
+      - ./src/front/admin:/home/node/app
+    ports:
+      - ${VUE_APP_ADMIN_PORT}:8080
+    command: "npm run serve"
+    networks:
+      - app
+
+  db:
+    image: postgres
+    env_file: .env
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - ${DB_PORT}:5432
+    volumes:
+      - db-data:/var/lib/postgresql/data/
+    networks:
+      - app
+
+
+volumes:
+  db-data:
+
+networks:
+  app:

@@ -1,0 +1,29 @@
+{
+  "name": "mega-slot-server-side",
+  "version": "1.0.0",
+  "description": "Slot machine server side.",
+  "main": "index.js",
+  "scripts": {
+    "initDb": "npm install && node db/initTables.js && node db/addFieldsToPlayersTable.js && node db/addFieldsToSlotsTable.js && node db/seed/initSlot.js",
+    "startLocal": "npm run initDb && nodemon index.js",
+    "startProd": "npm run initDb && node index.js"
+  },
+  "author": "jsonbaby",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "express-promise-router": "^4.0.1",
+    "lodash": "^4.17.20",
+    "morgan": "^1.10.0",
+    "pg": "^8.3.3"
+  },
+  "engines": {
+    "node": "10.x"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
