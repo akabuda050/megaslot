@@ -12,9 +12,10 @@ class Slot {
     this.lines = slot.lines.map((l) => l.map((li) => li.value));
     this.payTable = slot.paytable.map((pt) => pt.map((pti) => pti.cost));
 
+    this.setUp();
+
     //this.bids = slot.bids;
     //this.defaultBid = 0.5;
-    this.setUp();
   }
 
   async checkRTP() {
@@ -49,6 +50,7 @@ class Slot {
   setUp() {
     this.prepareBids();
     this.setBalance(0);
+    this.payTable =  this.payTable.map((pt) => pt.map((pti) => this.k * +pti.cost));
 
     this.wonMoney = 0;
     this.totalWonMoney = 0;
@@ -62,6 +64,7 @@ class Slot {
 
   prepareBids() {
     this.oneLineBid = 0.5;
+    this.k = 1;
     this.bids = [
       0.5,
       1,
@@ -295,7 +298,7 @@ class Slot {
     this.looseMoney += bid;
 
     this.spin(this.defaultReels);
-    let win = bid * this.checkLines(this.view);
+    let win = Math.round(((bid * this.checkLines(this.view)) + Number.EPSILON) * 100) / 100
 
     this.moneyFromDefaultGame += win;
     this.wonMoney = win;
