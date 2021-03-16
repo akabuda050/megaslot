@@ -13,9 +13,6 @@ class Slot {
     this.payTable = slot.paytable.map((pt) => pt.map((pti) => pti.cost));
 
     this.setUp();
-
-    //this.bids = slot.bids;
-    //this.defaultBid = 0.5;
   }
 
   async checkRTP() {
@@ -50,7 +47,7 @@ class Slot {
   setUp() {
     this.prepareBids();
     this.setBalance(0);
-    this.payTable =  this.payTable.map((pt) => pt.map((pti) => this.k * +pti.cost));
+    this.payTable =  this.payTable.map((pt) => pt.map((pti) => this.k * parseFloat(pti)));
 
     this.wonMoney = 0;
     this.totalWonMoney = 0;
