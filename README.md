@@ -21,5 +21,5 @@ Node.js and Vue.js application to show how slot machines work.
  
 # Notes
  - `node` service is looking for `front/admin/dist` and `front/client/dist` so make sure you build front as well if you want to run prod for example
- - `node` service runs initDb script every time you run `docker-compose up`
- - all services run npm install before running any script
+ - `node` service runs `initDb` script every time you run `docker-compose up`
+ - all services run `npm install` before running any script
