@@ -95,7 +95,7 @@
       </template>
       <span style="margin:10px;">Last Win: FUN {{ lastWon }}</span>
     </div>
-    <div id="infoblock">{{ (won && `Win: FUN {won}`) || infoblockMsg }}</div>
+    <div id="infoblock">{{ (won && `Win: FUN ${won}`) || infoblockMsg }}</div>
     <div id="playerId" v-if="isLoginOpen">
       <input class="playerId-field" v-model="playerId" />
       <button class="playerId-button" @click="prepareGame">
