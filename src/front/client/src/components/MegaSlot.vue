@@ -52,7 +52,7 @@
             <img :src="`${payTableMap[symbol].image}`" />
             <strong>{{ symbolsCount }}</strong>
             <strong
-              >${{
+              >FUN {{
                 selectedBid * payTableMap[symbol].value[symbolsCount]
               }}</strong
             >
@@ -83,19 +83,19 @@
         <span
           style="margin:10px; cursor: pointer;"
           @click.self="showBalance = false"
-          >Balance: ${{ animatedBalance }}</span
+          >Balance: FUN {{ animatedBalance }}</span
         >
       </template>
       <template v-else-if="!showBalance">
         <span
           style="margin:10px; cursor: pointer;"
           @click.self="showBalance = true"
-          >Total: ${{ parseFloat(total).toFixed(2) }}</span
+          >Total: FUN {{ parseFloat(total).toFixed(2) }}</span
         >
       </template>
-      <span style="margin:10px;">Last Win: ${{ lastWon }}</span>
+      <span style="margin:10px;">Last Win: FUN {{ lastWon }}</span>
     </div>
-    <div id="infoblock">{{ (won && `Win: $${won}`) || infoblockMsg }}</div>
+    <div id="infoblock">{{ (won && `Win: FUN {won}`) || infoblockMsg }}</div>
     <div id="playerId" v-if="isLoginOpen">
       <input class="playerId-field" v-model="playerId" />
       <button class="playerId-button" @click="prepareGame">
@@ -105,7 +105,7 @@
     <div class="spinblock" @click.self="openFullscreen">
       <select id="bid" v-model="selectedBid" @change="onChangeBid">
         <option v-for="bid in bids" :value="bid" :key="`bid-${bid}`">
-          ${{ bid }}
+          FUN {{ bid }}
         </option>
       </select>
       <button
